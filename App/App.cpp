@@ -24,7 +24,7 @@ int SGX_CDECL main(int argc, char *argv[])
 
     sgx_status_t ret = SGX_ERROR_UNEXPECTED;
 
-    int value = 12345;
+    int untrusted_value = 12345;
 
     // init enclave
     ret = sgx_create_enclave(ENCLAVE_FILENAME, SGX_DEBUG_FLAG, NULL, NULL, &global_eid, NULL);
