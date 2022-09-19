@@ -1,0 +1,10 @@
+enclave {
+    trusted {
+        public int trusted_function(void);
+    };
+
+    untrusted {
+        void wait_keyinput([in, string] const char *str);
+    };
+
+};
