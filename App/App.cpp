@@ -9,12 +9,14 @@
 
 sgx_enclave_id_t global_eid = 0;
 
-void wait_keyinput(const char *str)
+/* ocall functions (untrusted) */
+void ocall_wait_keyinput(const char *str)
 {
     printf("%s", str);
     getchar();
 }
 
+/* application entry */
 int SGX_CDECL main(int argc, char *argv[])
 {
     (void)(argc);
@@ -32,9 +34,9 @@ int SGX_CDECL main(int argc, char *argv[])
         return -1;
     }
  
-    // invoke trusted_function();
+    // invoke trusted_func01();
     int returned_result;
-    ret = trusted_function(global_eid, &returned_result);
+    ret = trusted_func01(global_eid, &returned_result);
     if (ret != SGX_SUCCESS) {
         printf("Enclave call error\n");
         return -1;
@@ -43,8 +45,8 @@ int SGX_CDECL main(int argc, char *argv[])
     // destroy the enclave
     sgx_destroy_enclave(global_eid);
 
-    printf ("X (untrusted value): %d\n", untrusted_x);
-    printf ("X (trusted value): %d\n", returned_result);
+    printf ("X (untrusted): %d\n", untrusted_x);
+    printf ("X (trusted): %d\n", returned_result);
 
     return 0;
 }

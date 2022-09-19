@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <string.h>
 
-int trusted_function()
+int trusted_func01()
 {
-    int trusted_value = 987654321;
-    wait_keyinput("Enter key to show variables values in memory...");
-    return trusted_value;
+    int trusted_x = 987654321;
+    ocall_wait_keyinput("Please enter keyboard to show variables in memory ...");
+    return trusted_x;
 }
